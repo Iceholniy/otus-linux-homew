@@ -1,0 +1,15 @@
+    1  sudo useradd otusadm && sudo useradd otus
+    2  echo "Otus2022!" | sudo passwd --stdin otusadm && echo "Otus2022!" | sudo passwd --stdin otus
+    3  passwd otusadm 
+    4  passwd otus
+    5  groupadd -f admin
+    6  usermod otusadm -a -G admin && usermod root -a -G admin && usermod vagrant -a -G admin
+    7  ip -br a
+    8  192.168.57.10
+    9  cat /etc/group | grep admin
+   10  vim /usr/local/bin/login.sh
+   11  chmod +x /usr/local/bin/login.sh
+   12  vim /etc/pam.d/sshd
+   13  date 082712302022.00
+   14  date
+   15  history > hw_history
