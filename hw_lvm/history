@@ -1,0 +1,60 @@
+lsblk
+pvcreate /dev/sdb
+vgcreate neotus /dev/sdb
+lvcreate --help
+lvcreate -l+80%FREE -n firstlv otus
+lvcreate -l+80%FREE -n firstlv neotus
+vgdisplay
+vgs
+lsblk
+lvcreate -L 30M -n secondlv neotus
+lvs
+mkfs.ext4 /dev/neotus/firstlv
+mkdir /can
+mount /dev/neotus/firstlv /can/
+mount | grep can
+lsblk
+pvcreate /dev/sdc
+vgextend neotus /dev/sdc
+vgs
+vgdisplay -v neotus | grep 'PV Name"
+vgdisplay -v neotus | grep 'PV Name'
+dd if=/dev/zero of=/can/test.log bs=1mcount=8000 status=progress
+dd if=/dev/zero of=/can/test.log bs=1M count=8000 status=progress
+df -th
+df -h
+lvextend -l+80%FREE /dev/neotus/firstlv
+df -h
+resize2fs /dev/neotus/firstlv
+df -h
+umount /can
+e2fsck -fy /dev/neotus/firstlv
+resize2fs /dev/neotus/firstlv 300M
+lvreduce /dev/neotus/firstlv -L 300M
+mount /dev/neotus/firstlv /can/
+ls /can/
+df -h
+lvs
+lsblk
+pvcreate /dev/sdf
+vgextend neotus /dev/sdf
+lsblk
+vgs
+vgdisplay -v neotus | grep 'PV Name'
+lvcreate -L 200M -s -n lv-snap /dev/neotus/firstlv
+lsblk
+mkdir /can-snap
+mount /dev/neotus/lv-snap /can-snap/
+l -Fal /can-snap/
+umount /can-snap
+rm /can/test.log
+ll /can
+umount /can
+lvconvert --merge /dev/neotus/lv-snap
+mount /dev/neotus/firstlv /can
+ll /can
+lsblk
+pvcreate /dev/sd{d,e}
+vgcreate vg0 /dev/sd{d,e}
+lvcreate -l+80%FREE -m1 -n mirror vg0
+lvs
