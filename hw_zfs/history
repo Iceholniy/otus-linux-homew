@@ -1,0 +1,46 @@
+ 1  apt update
+    2  apt install zfsutils-linux
+    3  lsblk
+    4  zpool create zfspl1 mirror /dev/sd{b,c}
+    5  zpool create zfspl2 mirror /dev/sd{d,e}
+    6  zpool create zfspl3 mirror /dev/sd{f,g}
+    7  zpool create zfspl4 mirror /dev/sd{h,i}
+    8  zpool list
+    9  man zfs
+   10  man zfs-set
+   11  zfs set compression=lzjb zfpl1
+   12  zpool list
+   13  zfs set compression=lzjb zfspl1
+   14  zfs set compression=lz4 zfspl2
+   15  zfs set compression=gzip-9 zfspl3
+   16  zfs set compression=zle zfspl4
+   17  zfs get all | grep compression
+   18  for i in {1..4}; do wget -P /zfspl$i; https://gutenberg.org/cache/epub/2600/pg2600.converter.log; done
+   19  for i in {1..4}; do wget -P /zfspl$i https://gutenberg.org/cache/epub/2600/pg2600.converter.log; done
+   20  ls -l /zfspl*
+   21  zfs list
+   22  zfs get all | grep compressratio | grep -v ref
+   23  wget -O archive.tar.gz --no-check-certificate 'https://drive.usercontent.google.com/download?id=1MvrcEp-WgAQe57aDEzxSRalPAwbNN1Bb&export=download'
+   24  ll
+   25  tar -xf archive.tar.gz
+   26  ll
+   27  zpool import -d zpoolexport/
+   28  zpool import -d zpoolexport/ otus
+   29  zpool status
+   30  zpool get all otus
+   31  ll
+   32  ls
+   33  led
+   34  wget -O otus_task2.file --no-check-certificate https://drive.usercontent.google.com/download?id=1wgxjih8YZ-cqLqaZVa0lA3h3Y029c3oI&export=download
+   35  дд
+   36  ll
+   37  zfs receive otus/test@today < otus_task2.file
+   38  cd /otus/test/
+   39  find . -name "secret_message"
+   40  find / -name "secret_message"
+   41  cat /otus/test/task1/file_mess/secret_message
+   42  zfs get recordsize otus
+   43  zfs get available otus
+   44  zfs get recordsize otus
+   45  zfs get compression otus
+   46  history > /home/vagrant/history
