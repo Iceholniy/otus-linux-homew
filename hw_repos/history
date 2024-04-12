@@ -1,0 +1,56 @@
+    1  echo $https_rpxy
+    2  echo $https_proxy
+    3  wget https://www.openssl.org/source/openssl-3.3.0.tar.gz
+    4  l
+    5  sls
+    6  ls
+    7  tar -xf openssl-3.3.0.tar.gz 
+    8  ls
+    9  ls openssl-3.3.0
+   10  pwd
+   11  cd openssl-3.3.0/
+   12  pwd
+   13  cd ..
+   14  ls
+   15  vi rpmbuild/SPECS/nginx.spec 
+   16  ls openssl-3.3.0
+   17  ll
+   18  ll openssl-3.3.0
+   19  yum-builddep rpmbuild/SPECS/nginx.spec
+   20  rpmbuild -bb rpmbuild/SPECS/nginx.spec
+   21  ды
+   22  ls
+   23  rm -rf openssl-3.3.0*
+   24  ls
+   25  wget https://www.openssl.org/source/openssl-1.1.1w.tar.gz
+   26  tar -xf openssl-1.1.1w.tar.gz 
+   27  ls
+   28  vi rpmbuild/SPECS/nginx.spec 
+   29  rpmbuild -bb rpmbuild/SPECS/nginx.spec
+   30  vi rpmbuild/SPECS/nginx.spec 
+   31  rpmbuild -bb rpmbuild/SPECS/nginx.spec
+   32  ls
+   33  yum localinstall -y rpmbuild/RPMS/x86_64/nginx-1.20.2-1.el8.ngx.x86_64.rpm 
+   34  systemctl start nginx
+   35  systemctl status nginx
+   36  echo "Забыл \ поставить в кофинг файле"
+   37  mkdir /usr/share/nginx/html/repo
+   38  cp rpmbuild/RPMS/x86_64/nginx-1.20.2-1.el8.ngx.x86_64.rpm /usr/share/nginx/html/repo/
+   39  wget https://downloads.percona.com/downloads/percona-distribution-mysql-ps/percona-
+   40  wget https://downloads.percona.com/downloads/percona-distribution-mysql-ps/percona-distribution-mysql-ps-8.0.28/binary/redhat/8/x86_64/percona-orchestrator-3.2.6-2.el8.x86_64.rpm -O /usr/share/nginx/html/repo/percona-orchestrator-3.2.6-2.el8.x86_64.rpm
+   41  createrepo /usr/share/nginx/html/repo/
+   42  vi /etc/nginx/conf.d/default.conf 
+   43  nginx -t
+   44  nginx -s reload
+   45  ip r
+   46  ip -br a
+   47  curl http://localhost/repo/
+   48  curl -a http://localhost/repo/
+   49  ss -tunllp
+   50  curl localhost
+   51  vi ~/.bashrc
+снова поправил прокси на машине для корректной работы
+   52  bash
+и в этом терминале уже смог curl localhost/repo/ сделать и увидеть пакеты и установить percona
+   53  history | less
+   54  history > history
