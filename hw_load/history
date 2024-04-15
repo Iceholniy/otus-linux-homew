@@ -1,0 +1,21 @@
+    1  vgs
+    2  lsblk
+    3  vgrename VolGroup00 csroot
+    4  vi /etc/fstab
+    5  vi /etc/default/grub
+    6  vi /boot/grub2/grub.cfg
+    7  mkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)
+    8  reboot
+    9  vgs
+   10  mkdir /usr/lib/dracut/modules.d/01test
+   11  vi /usr/lib/dracut/modules.d/01test/test.sh
+   12  chmod +x /usr/lib/dracut/modules.d/01test/test.sh
+   13  mv /usr/lib/dracut/modules.d/01test/test.sh /usr/lib/dracut/modules.d/01test/module-setup.sh
+   14  ll /usr/lib/dracut/modules.d/01test/test.sh
+   15  ll /usr/lib/dracut/modules.d/01test/
+   16  vi /usr/lib/dracut/modules.d/01test/test.sh
+   17  chmod +x /usr/lib/dracut/modules.d/01test/test.sh
+   18  mkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)
+   19  lsinitrd -m /boot/initramfs-$(uname -r).img | grep test
+   20  vi /boot/grub2/grub.cfg
+   21  history > history
