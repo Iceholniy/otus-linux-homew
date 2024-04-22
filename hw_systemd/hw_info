@@ -1,0 +1,94 @@
+Apr 22 10:23:08 magma systemd-udevd[662]: Network interface NamePolicy= disabled on kernel command line, ignoring.
+Apr 22 10:23:08 magma systemd[1]: firewalld.service: Succeeded.
+Apr 22 10:23:08 magma systemd[1]: Stopped firewalld - dynamic firewall daemon.
+Apr 22 10:25:16 magma systemd[3695]: Starting Mark boot as successful...
+Apr 22 10:25:16 magma systemd[3695]: Started Mark boot as successful.
+Apr 22 10:25:23 magma systemd[1]: Started Run watchlog script every 30 second.
+Apr 22 10:27:06 magma systemd[1]: Starting My watchlog service...
+Apr 22 10:27:06 magma root[3942]: Mon Apr 22 10:27:06 UTC 2024: I found word, Master!
+Apr 22 10:27:06 magma systemd[1]: watchlog.service: Succeeded.
+Apr 22 10:27:06 magma systemd[1]: Started My watchlog service.
+tcp   LISTEN 0      511          0.0.0.0:8080      0.0.0.0:*    users:(("httpd",pid=6324,fd=3),("httpd",pid=6323,fd=3),("httpd",pid=6322,fd=3),("httpd",pid=6319,fd=3))
+tcp   LISTEN 0      511          0.0.0.0:80        0.0.0.0:*    users:(("httpd",pid=6101,fd=3),("httpd",pid=6100,fd=3),("httpd",pid=6099,fd=3),("httpd",pid=6096,fd=3))
+
+history
+++++++++
+
+    1  setenforce 0
+    2  getenforce 
+    3  systemctl status firewalld.service 
+    4  systemctl stop firewalld.service 
+    5  systemctl status firewalld.service 
+    6  vi /etc/sysconfig/watchlog
+    7  vi /var/log/watchlog.log
+    8  vi /opt/watchlog.sh
+    9  chmod +x /opt/watchlog.sh 
+   10  vi /etc/systemd/system/watchlog.service
+   11  vi /etc/systemd/system/watchlog.timer
+   12  systemctl start watchlog.timer
+   13  tail -f /var/log/messages
+   14  systemctl status watchlog.service 
+   15  systemctl status watchlog.timer 
+   16  systemctl start watchlog.service 
+   17  tail -f /var/log/messages
+   18  tail -f /var/log/messages > logs_correct
+   19  cat logs_correct 
+   20  export HTTP_PROXY="http://10.0.2.2:3128"
+   21  export HTTPS_PROXY="http://10.0.2.2:3128"
+   22  export http_proxy="http://10.0.2.2:3128"
+   23  export https_proxy="http://10.0.2.2:3128"
+   24  yum install epel-release -y && yum install spawn-fcgi php php-cli
+   25  vi /etc/sysconfig/spawn-fcgi
+   26  vi /etc/systemd/system/spawn-fcgi.service
+   27  systemctl start spawn-fcgi
+   28  systemctl status spawn-fcgi
+   29* vi /usr/lib/systemd/system/httpd.servic
+   30  vi /etc/sysconfig/httpd-first
+   31  vi /etc/sysconfig/httpd-second
+   32  vi /etc/httpd/conf
+   33  vi /etc/httpd/conf/first.conf
+   34  vi /etc/httpd/conf/second.conf
+   35  systemctl start httpd@first
+   36  vi /etc/sysconfig/httpd-first 
+   37  vi /etc/sysconfig/httpd-second 
+   38  systemctl start httpd@first
+   39  systemctl status httpd@first.service
+   40  vi /etc/httpd/conf/first.conf
+   41  systemctl start httpd@first
+   42  systemctl status httpd@first.service
+   43  systemctl start httpd@second
+   44  systemctl status httpd@second.service 
+   45  vi /etc/sysconfig/httpd-first 
+   46  vi /etc/rc.d/init.d/spawn-fcgi 
+   47  systemctl status spawn-fcgi.service 
+   48  cat /etc/sysconfig/httpd-first 
+   49  /usr/sbin/httpd -f /etc/httpd/conf/first.conf -DFOREGROUND
+   50  /usr/sbin/httpd $OPTIONS -DFOREGROUND
+   51  vi /etc/httpd/conf/httpd.conf 
+   52  vi /etc/httpd/conf/first.conf 
+   53  vi /etc/httpd/conf/second.conf.conf
+   54  vi /etc/httpd/conf/second.conf 
+   55  systemctl start httpd@first
+   56  cd /etc/httpd/conf/
+   57  ls
+   58  rm first.conf second.conf 
+   59  cp httpd.conf first.conf
+   60  cp httpd.conf second.conf
+   61  vi first.conf 
+   62  cp httpd.conf first.conf
+   63  vi first.conf 
+   64  cp httpd.conf first.conf
+   65  vi second.conf 
+   66  systemctl start httpd@first
+   67  systemctl start httpd@second
+   68  ss -tunlp | grep httpd > result
+   69  cat result 
+   70  ls
+   71  cp result ~/
+   72  cd ~
+   73  ls
+   74  cat logs_correct >> hw_info
+   75  cat result >> hw_info 
+   76  cat hw_info 
+   77  vi hw_info 
+   78  history >> hw_info 
