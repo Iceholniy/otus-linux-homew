@@ -1,0 +1,3 @@
+#!/bin/bash
+
+time for i in {1..20000}; do touch first_$i; done 
