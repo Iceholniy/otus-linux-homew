@@ -1,0 +1,5 @@
+#!/bin/bash
+
+nice -n 40 yes>/dev/null &
+
+nice -n 1 sha1sum /dev/zero &
