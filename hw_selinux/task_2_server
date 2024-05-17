@@ -1,0 +1,5 @@
+ 1  cat /var/log/audit/audit.log | audit2why
+    2  ls -laZ /etc/named
+    3  semanage fcontext -l | grep named
+    4  chcon -R -t named_zone_t /etc/named
+    5  history > task_2

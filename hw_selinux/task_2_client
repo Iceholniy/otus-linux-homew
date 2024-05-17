@@ -1,0 +1,14 @@
+    1  history
+    2  nsupdate -k /etc/named.zonetransfer.key
+    3  history
+    4  cat /var/log/audit/audit.log |audit2why
+    5  nsupdate -k /etc/named.zonetransfer.key
+    6  cat /var/log/audit/audit.log |audit2why
+    7  cat /var/log/audit/audit.log
+    8  grep fail /var/log/audit/audit.log
+    9  tail 20 /var/log/audit/audit.log | grep failed
+   10  tail -n 20 /var/log/audit/audit.log | grep failed
+   11  tail -n 100 /var/log/audit/audit.log | grep failed
+   12  cat /var/log/audit/audit.log | audit2why
+   13  nsupdate -k /etc/named.zonetransfer.key
+   14  history > task2_client
