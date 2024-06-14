@@ -1,0 +1,17 @@
+    1  apt list rsyslog
+    2  vi /etc/rsyslog.conf 
+    3  systemctl restart rsyslog
+    4  ss -tunlp
+    5  ip -br a
+    6  cat /var/log/rsyslog/web/nginx_access.log 
+    7  cat /var/log/rsyslog/web/nginx_error.log 
+    8  echo "cat /var/log/rsyslog/web/nginx_*" > hw_log && cat /var/log/rsyslog/web/nginx_* >> hw_log
+    9  ls
+   10  vi hw_log 
+   11  ip -br a
+   12  ip 
+   13  ip r
+   14  scp hw_log user@10.0.2.2:/home/user/hw/hw_logs
+   15  vi /etc/rsyslog.conf 
+   16  ls
+   17  history > host_log_history

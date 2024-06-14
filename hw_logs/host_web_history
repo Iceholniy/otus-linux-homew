@@ -1,0 +1,11 @@
+    1  timedatectl
+    2  apt update && apt install -y nginx
+    3  ip -br a
+    4  tail -f ~/.bashrc
+    5  nginx -v
+    6  vi /etc/nginx/nginx.conf 
+    7  nginx -t
+    8  systemctl restart nginx
+    9  mv /var/www/html/index.nginx-debian.html /var/www/
+   10  vi /etc/nginx/nginx.conf 
+   11  history > host_web_history
