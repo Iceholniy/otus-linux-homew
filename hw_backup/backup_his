@@ -1,0 +1,13 @@
+    1  apt install borgbackup
+    2  lsblk
+    3  mkfs.ext4 /dev/sdb
+    4  mount /dev/sdb /var/backup
+    5  mkdir /var/backup
+    6  mount /dev/sdb /var/backup
+    7  adduser borg
+    8  chown borg:borg /var/backup/
+    9  su borg
+   10  vi ~/.bashrc
+   11  bash
+   12  history
+   13  history > backup_his

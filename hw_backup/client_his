@@ -1,0 +1,14 @@
+    1  apt install borgbackup
+    2  ssh-keygen
+    3  borg init --encryption=repokey borg@192.168.50.10:/var/backup/
+    4  borg create --stats --list borg@192.168.50.10:/var/backup/::"etc-{now:%Y-%m-%d_%H:%M:%S}" /etc
+    5  borg list borg@192.168.50.10:/var/backup/
+    6  borg list borg@192.168.50.10:/var/backup/::etc-2024-07-01_13:32:40
+    7  borg extract borg@192.168.50.10:/var/backup/::etc-2024-07-01_13:32:40 etc/hostname
+    8  borg extract borg@192.168.50.10:/var/backup/::etc-2024-07-01_13:32:40 /etc/hostname
+    9  vi /etc/systemd/system/borg-backup.service
+   10  vi /etc/systemd/system/borg-backup.timer
+   11  systemctl enable borg-backup.timer
+   12  systemctl start borg-backup.timer
+   13  systemctl list-timers --all
+   14  ssh-copy-id -i .ssh/id_rsa.pub borg@192.168.50.10
