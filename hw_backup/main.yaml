@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  tasks:
+  - name: set proxy
+    ansible.builtin.blockinfile:
+      path: /etc/profile
+      block: |
+             export HTTP_PROXY="http://10.0.2.2:3128"
+             export HTTPS_PROXY="http://10.0.2.2:3128"
+             export http_proxy="http://10.0.2.2:3128"
+             export https_proxy="http://10.0.2.2:3128"
+  - name: install borg
+    ansible.builtin.package:
+      name: borgbackup 
+      state: present   
+    environment:
+      http_proxy: http://10.0.2.2:3128

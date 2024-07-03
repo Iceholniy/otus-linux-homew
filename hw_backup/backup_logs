@@ -1,0 +1,79 @@
+Jul 03 07:58:04 client systemd[1]: Starting Borg Backup...
+Jul 03 07:58:05 client borg[3893]: ------------------------------------------------------------------------------
+Jul 03 07:58:05 client borg[3893]: Repository: ssh://borg@192.168.50.10/var/backup
+Jul 03 07:58:05 client borg[3893]: Archive name: etc-2024-07-03_07:58:04
+Jul 03 07:58:05 client borg[3893]: Archive fingerprint: 3dbd742ebfb45c0e7d193c9661deda4c05750126f51442d9240112d8aac8b462
+Jul 03 07:58:05 client borg[3893]: Time (start): Wed, 2024-07-03 07:58:05
+Jul 03 07:58:05 client borg[3893]: Time (end):   Wed, 2024-07-03 07:58:05
+Jul 03 07:58:05 client borg[3893]: Duration: 0.13 seconds
+Jul 03 07:58:05 client borg[3893]: Number of files: 705
+Jul 03 07:58:05 client borg[3893]: Utilization of max. archive size: 0%
+Jul 03 07:58:05 client borg[3893]: ------------------------------------------------------------------------------
+Jul 03 07:58:05 client borg[3893]:                        Original size      Compressed size    Deduplicated size
+Jul 03 07:58:05 client borg[3893]: This archive:                2.12 MB            932.01 kB              1.29 kB
+Jul 03 07:58:05 client borg[3893]: All archives:                4.23 MB              1.86 MB              1.06 MB
+Jul 03 07:58:05 client borg[3893]:                        Unique chunks         Total chunks
+Jul 03 07:58:05 client borg[3893]: Chunk index:                     678                 1381
+Jul 03 07:58:05 client borg[3893]: ------------------------------------------------------------------------------
+Jul 03 07:58:06 client systemd[1]: borg-backup.service: Deactivated successfully.
+Jul 03 07:58:06 client systemd[1]: Finished Borg Backup.
+Jul 03 08:03:40 client systemd[1]: Starting Borg Backup...
+Jul 03 08:03:41 client borg[3926]: ------------------------------------------------------------------------------
+Jul 03 08:03:41 client borg[3926]: Repository: ssh://borg@192.168.50.10/var/backup
+Jul 03 08:03:41 client borg[3926]: Archive name: etc-2024-07-03_08:03:40
+Jul 03 08:03:41 client borg[3926]: Archive fingerprint: 06f6bda36130d09eafd578e7a1d8e3422a0f31e2223d5b44c0d347acbe18735e
+Jul 03 08:03:41 client borg[3926]: Time (start): Wed, 2024-07-03 08:03:41
+Jul 03 08:03:41 client borg[3926]: Time (end):   Wed, 2024-07-03 08:03:41
+Jul 03 08:03:41 client borg[3926]: Duration: 0.10 seconds
+Jul 03 08:03:41 client borg[3926]: Number of files: 705
+Jul 03 08:03:41 client borg[3926]: Utilization of max. archive size: 0%
+Jul 03 08:03:41 client borg[3926]: ------------------------------------------------------------------------------
+Jul 03 08:03:41 client borg[3926]:                        Original size      Compressed size    Deduplicated size
+Jul 03 08:03:41 client borg[3926]: This archive:                2.12 MB            932.01 kB                605 B
+Jul 03 08:03:41 client borg[3926]: All archives:                6.35 MB              2.79 MB              1.06 MB
+Jul 03 08:03:41 client borg[3926]:                        Unique chunks         Total chunks
+Jul 03 08:03:41 client borg[3926]: Chunk index:                     679                 2073
+Jul 03 08:03:41 client borg[3926]: ------------------------------------------------------------------------------
+Jul 03 08:03:43 client systemd[1]: borg-backup.service: Deactivated successfully.
+Jul 03 08:03:43 client systemd[1]: Finished Borg Backup.
+Jul 03 08:03:43 client systemd[1]: borg-backup.service: Consumed 1.044s CPU time.
+Jul 03 08:08:40 client systemd[1]: Starting Borg Backup...
+Jul 03 08:08:41 client borg[3939]: ------------------------------------------------------------------------------
+Jul 03 08:08:41 client borg[3939]: Repository: ssh://borg@192.168.50.10/var/backup
+Jul 03 08:08:41 client borg[3939]: Archive name: etc-2024-07-03_08:08:40
+Jul 03 08:08:41 client borg[3939]: Archive fingerprint: 3f1103ac7ba8d8a9ff4bcffd914fa7803a9bff0d88e9507dea129e2136a83e77
+Jul 03 08:08:41 client borg[3939]: Time (start): Wed, 2024-07-03 08:08:41
+Jul 03 08:08:41 client borg[3939]: Time (end):   Wed, 2024-07-03 08:08:41
+Jul 03 08:08:41 client borg[3939]: Duration: 0.12 seconds
+Jul 03 08:08:41 client borg[3939]: Number of files: 705
+Jul 03 08:08:41 client borg[3939]: Utilization of max. archive size: 0%
+Jul 03 08:08:41 client borg[3939]: ------------------------------------------------------------------------------
+Jul 03 08:08:41 client borg[3939]:                        Original size      Compressed size    Deduplicated size
+Jul 03 08:08:41 client borg[3939]: This archive:                2.12 MB            932.01 kB                605 B
+Jul 03 08:08:41 client borg[3939]: All archives:                6.35 MB              2.79 MB              1.06 MB
+Jul 03 08:08:41 client borg[3939]:                        Unique chunks         Total chunks
+Jul 03 08:08:41 client borg[3939]: Chunk index:                     679                 2073
+Jul 03 08:08:41 client borg[3939]: ------------------------------------------------------------------------------
+Jul 03 08:08:43 client systemd[1]: borg-backup.service: Deactivated successfully.
+Jul 03 08:08:43 client systemd[1]: Finished Borg Backup.
+Jul 03 08:08:43 client systemd[1]: borg-backup.service: Consumed 1.084s CPU time.
+Jul 03 08:14:40 client systemd[1]: Starting Borg Backup...
+Jul 03 08:14:41 client borg[3951]: ------------------------------------------------------------------------------
+Jul 03 08:14:41 client borg[3951]: Repository: ssh://borg@192.168.50.10/var/backup
+Jul 03 08:14:41 client borg[3951]: Archive name: etc-2024-07-03_08:14:40
+Jul 03 08:14:41 client borg[3951]: Archive fingerprint: c1777c544e46bcb168939568cd19b1d912fd5dbb1b32a712c21b29945568f5e8
+Jul 03 08:14:41 client borg[3951]: Time (start): Wed, 2024-07-03 08:14:41
+Jul 03 08:14:41 client borg[3951]: Time (end):   Wed, 2024-07-03 08:14:41
+Jul 03 08:14:41 client borg[3951]: Duration: 0.11 seconds
+Jul 03 08:14:41 client borg[3951]: Number of files: 705
+Jul 03 08:14:41 client borg[3951]: Utilization of max. archive size: 0%
+Jul 03 08:14:41 client borg[3951]: ------------------------------------------------------------------------------
+Jul 03 08:14:41 client borg[3951]:                        Original size      Compressed size    Deduplicated size
+Jul 03 08:14:41 client borg[3951]: This archive:                2.12 MB            932.01 kB                605 B
+Jul 03 08:14:41 client borg[3951]: All archives:                6.35 MB              2.79 MB              1.06 MB
+Jul 03 08:14:41 client borg[3951]:                        Unique chunks         Total chunks
+Jul 03 08:14:41 client borg[3951]: Chunk index:                     679                 2073
+Jul 03 08:14:41 client borg[3951]: ------------------------------------------------------------------------------
+Jul 03 08:14:43 client systemd[1]: borg-backup.service: Deactivated successfully.
+Jul 03 08:14:43 client systemd[1]: Finished Borg Backup.
+Jul 03 08:14:43 client systemd[1]: borg-backup.service: Consumed 1.102s CPU time.
