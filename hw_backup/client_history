@@ -1,0 +1,31 @@
+    1  vi /etc/profile
+    2  su borg
+    3  ssh-keygen 
+    4  ssh-copy-id -i .ssh/id_rsa.pub borg@192.168.50.10
+    5  borg init --encryption=repokey borg@192.168.50.10:/var/backup
+    6  borg create --stats --list borg@192.168.50.10:/var/backup::"etc-{now:%Y-%m-%d_%H:%M:%S}" /etc
+    7  borg list borg@192.168.50.10:/var/backup
+    8  borg list borg@192.168.50.10:/var/backup::etc-2024-07-03_07:51:54
+    9  mv /etc/hostname .
+   10  borg extract borg@192.168.50.10:/var/backup/::etc-2024-07-03_07:51:54 etc/hostname
+   11  ls
+   12  mv hostname /etc/
+   13  ls etc/
+   14  ls
+   15  rm -r etc/
+   16  vim /etc/systemd/system/borg-backup.service
+   17  vi /etc/systemd/system/borg-backup.timer
+   18  systemctl enable borg-backup.timer 
+   19  systemctl start borg-backup.timer
+   20  systemctl list-timers --all
+   21  systemctl start borg-backup.timer
+   22  systemctl list-timers --all
+   23  vi /etc/systemd/system/borg-backup.timer
+   24  systemctl start borg-backup.service 
+   25  systemctl list-timers --all
+   26  journalctl -u borg-backup.service 
+   27  journalctl -fu borg-backup.service 
+   28  journalctl -fu borg-backup.service > backup_logs
+   29  journalctl -u borg-backup.service > backup_logs
+   30  scp backup_logs user@10.0.2.2:/home/user/hw/hw_backup/
+   31  history > client_log
