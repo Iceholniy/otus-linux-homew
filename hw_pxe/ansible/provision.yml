@@ -1,0 +1,93 @@
+---
+- name: Configure Router group hosts
+  hosts: server
+  become: yes
+  become_user: root
+
+  environment:
+    http_proxy: http://10.0.2.2:3128
+    https_proxy: http://10.0.2.2:3128
+
+  tasks:
+
+  - name: disable ufw
+    ansible.builtin.systemd:
+      state: "stopped"
+      enabled: false
+      name: "ufw"
+
+  - name: install dnsmasq
+    ansible.builtin.apt:
+      update_cache: true
+      name: 
+        - dnsmasq
+        - apache2
+      state: present
+
+  - name: add pxe.conf
+    ansible.builtin.template:
+      src: pxe.conf
+      dest: /etc/dnsmasq.d/pxe.conf
+
+  - name: mkdir
+    ansible.builtin.file:
+      path: "{{ item }}"
+      state: directory
+      mode: '0755'
+    loop:
+      - '/srv/tftp'
+      - '/srv/images'
+      - '/srv/ks'
+    tags:
+      - dirs
+
+  - name: download archive
+    ansible.builtin.get_url:
+      checksum: "sha256:575858a53b8cdde8d63a2cc1a5b90f1bbf0c2243b292a66a1ab2931d571eb260"
+      url: https://mirror.yandex.ru/ubuntu-releases/24.04/ubuntu-24.04-netboot-amd64.tar.gz
+      dest: /tmp/ubuntu-24.04-netboot-amd64.tar.gz
+      mode: '777'
+
+  - name: extract archive
+    ansible.builtin.unarchive:
+      src: /tmp/ubuntu-24.04-netboot-amd64.tar.gz
+      dest: /srv/tftp/
+      remote_src: true
+
+  - name: adding iso
+    ansible.builtin.copy:
+      src: ./ubuntu-24.04-live-server-amd64.iso
+      dest: /srv/images/
+
+  - name: add ks-server.conf
+    ansible.builtin.template:
+      src: ks-server.conf
+      dest: /etc/apache2/sites-available/ks-server.conf
+
+  - name: actibate ks-server in apache
+    ansible.builtin.shell: a2ensite ks-server.conf
+
+  - name: вносим изменения в файл /srv/tftp/amd64/pxelinux.cfg/default
+    ansible.builtin.template:
+      src: default
+      dest: /srv/tftp/amd64/pxelinux.cfg/default
+
+  - name: создаём файл /srv/ks/user-data и добавляем в него следующее содержимое
+    ansible.builtin.template:
+      src: user-data
+      dest: /srv/ks/user-data
+
+  - name: touch meta-data
+    ansible.builtin.file:
+      path: /srv/ks/meta-data
+      mode: '0755'
+      state: 'touch'
+
+  - name: перезагружаем web-сервер apache и dnsmasq
+    ansible.builtin.systemd:
+      state: "restarted"
+      name: "{{ item }}"
+      daemon_reload: true
+    loop:
+      - dnsmasq
+      - apache2
