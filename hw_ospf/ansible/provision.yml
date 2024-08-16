@@ -1,0 +1,94 @@
+---
+- name: OSPF
+  hosts: all
+  become: yes
+  become_user: root
+
+  environment:
+    http_proxy: http://10.0.2.2:3128
+    https_proxy: http://10.0.2.2:3128
+
+  tasks: 
+  
+  - name: disable ufw
+    ansible.builtin.systemd:
+      state: "stopped"
+      enabled: false
+      name: "ufw" 
+
+
+  - name: set up forward packages 
+    sysctl:
+      name: net.ipv4.conf.all.forwarding
+      value: '1'
+      state: present
+
+
+  - name: add gpg
+    ansible.builtin.apt_key:
+      url: https://deb.frrouting.org/frr/keys.asc
+      state: present
+
+  - name: add repo
+    ansible.builtin.apt_repository:
+      repo: deb https://deb.frrouting.org/frr jammy frr-stable
+      state: present
+
+  - name: install apt
+    apt:
+      name:
+        - net-tools
+        - frr 
+        - frr-pythontools
+      state: present
+      update_cache: true
+
+
+  - name: add frr daemons
+    ansible.builtin.template:
+      src: daemons
+      dest: /etc/frr/daemons
+      owner: frr
+      group: frr
+      mode: 0640
+
+
+  - name: Set up OSPF on router1
+    template:                                                                               
+      src: frr1.conf
+      dest: /etc/frr/frr.conf
+      owner: frr
+      group: frr
+      mode: 0640
+    when: (ansible_hostname == "router1")                                                
+
+  - name: Set up OSPF on router2
+    template:                                                                               
+      src: frr2.conf
+      dest: /etc/frr/frr.conf
+      owner: frr
+      group: frr
+      mode: 0640
+    when: (ansible_hostname == "router2")                                                
+
+  - name: Set up OSPF on router3 
+    template:                                                                               
+      src: frr3.conf
+      dest: /etc/frr/frr.conf
+      owner: frr
+      group: frr
+      mode: 0640
+    when: (ansible_hostname == "router3")                                                
+
+  - name: set up asynchronous routing
+    sysctl:
+      name: net.ipv4.conf.all.rp_filter
+      value: '0'
+      state: present
+
+  - name: restart FRR
+    service:
+      name: frr
+      state: restarted
+      enabled: true
+
