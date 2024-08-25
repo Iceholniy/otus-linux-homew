@@ -1,0 +1,98 @@
+---
+- name: global tasks
+  hosts: all
+  become: yes
+  become_user: root
+
+  environment:
+    http_proxy: http://10.0.2.2:3128
+    https_proxy: http://10.0.2.2:3128
+
+  tasks:
+
+  - name: disable ufw
+    ansible.builtin.systemd:
+      state: "stopped"
+      enabled: false
+      name: "ufw" 
+
+  - name: install apt
+    apt:
+      name:
+        - openvpn
+        - iperf3 
+        - selinux-utils
+        - easy-rsa
+      state: present
+      update_cache: true
+
+#  - name: disable selinux
+#    ansible.posix.selinux:
+#      state: disabled
+
+- name: server conf
+  hosts: server
+  become: yes
+  become_user: root
+
+  tasks:
+
+  - name: create key
+    ansible.builtin.shell:
+      cmd: openvpn --genkey secret /etc/openvpn/static.key
+#    when: (ansible_hostname == "server")
+
+  - name: copy key
+    ansible.builtin.fetch:
+      src: /etc/openvpn/static.key
+      dest: /tmp/
+      flat: true
+ #   when: (ansible_hostname == "server")
+  
+  - name: add server.conf
+    ansible.builtin.template:
+      src: server.conf
+      dest: /etc/openvpn/server.conf
+  #  when: (ansible_hostname == "server")
+
+  - name: add server unit
+    ansible.builtin.template:
+      src: server_unit
+      dest: /etc/systemd/system/openvpn@.service
+   # when: (ansible_hostname == "server")
+
+  - name: enable openvpn
+    ansible.builtin.systemd:
+      state: "started"
+      enabled: true
+      name: "openvpn@server" 
+ #   when: (ansible_hostname == "server")
+
+- name: client conf
+  hosts: client
+  become: yes
+  become_user: root
+
+  tasks:
+
+  - name: add client conf
+    ansible.builtin.template: 
+      src: client.conf
+      dest: /etc/openvpn/server.conf
+
+  - name: add client key
+    ansible.builtin.template: 
+      src: /tmp/static.key
+      dest: /etc/openvpn/static.key
+
+  - name: add unit
+    ansible.builtin.template: 
+      src: client_unit
+      dest: /etc/systemd/system/openvpn@.service
+
+  - name: enable openvpn
+    ansible.builtin.systemd:
+      state: "started"
+      enabled: true
+      name: "openvpn@server" 
+
