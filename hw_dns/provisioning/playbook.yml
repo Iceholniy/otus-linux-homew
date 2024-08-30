@@ -1,0 +1,121 @@
+
+---
+
+- hosts: all
+  become: yes
+  tasks:
+  - name: mirrors
+    shell: | 
+      sed -i s/mirror.centos.org/vault.centos.org/g /etc/yum.repos.d/*.repo
+      sed -i s/^#.*baseurl=http/baseurl=http/g /etc/yum.repos.d/*.repo
+      sed -i s/^mirrorlist=http/#mirrorlist=http/g /etc/yum.repos.d/*.repo
+#Установка пакетов bind, bind-utils и ntp
+  - name: install packages
+    ansible.builtin.yum:
+     name: "{{ item }}"
+     state: latest 
+    with_items:
+      - bind
+      - bind-utils
+      - ntpd
+  - name: start and enable ntpd 
+    service: 
+      name: ntpd
+      state: started
+      enabled: true
+#Копирование файла named.zonetransfer.key на хосты с правами 0644
+#Владелец файла — root, група файла — named
+  - name: copy transferkey to all servers and the client
+    copy: src=named.zonetransfer.key dest=/etc/named.zonetransfer.key mode=0644
+
+  - name: start chronyd
+    service: 
+      name: chronyd
+      state: restarted
+      enabled: true
+  - name: copy resolv.conf to the servers
+    template: src=servers-resolv.conf.j2 dest=/etc/resolv.conf mode=0644
+
+# Настройка хоста ns01
+- hosts: ns01
+  become: yes
+  tasks:
+  # Копирования файла named.conf
+  - name: copy named.conf
+    copy: 
+      src: master-named.conf 
+      dest: /etc/named.conf 
+      owner: root
+      group: named
+      mode: 0640
+  
+  #Копирование файлов с настройками зоны
+  - name: copy zones
+    copy: 
+      src: "{{ item }}" 
+      dest: /etc/named/
+      owner: root
+      group: named
+      mode: 0660
+    with_items:
+      - named.ddns.lab
+      - named.dns.lab
+      - named.dns.lab.client
+      - named.dns.lab.rev
+      - named.newdns.lab
+  
+  #Копирование файла resolv.conf на хосты
+  - name: copy resolv.conf to the servers
+    template: 
+      src: servers-resolv.conf.j2
+      dest: /etc/resolv.conf
+      owner: root 
+      group: root 
+      mode: 0644
+  
+  # Настройка прав для каталога /etc/named
+  - name: set /etc/named permissions
+    file: 
+      path: /etc/named
+      owner: root
+      group: named 
+      mode: 0670
+  
+  #Перезапуск и добавление в автозагрузку службы named
+  - name: ensure named is running and enabled
+    service: 
+      name: named 
+      state: restarted 
+      enabled: yes
+
+- hosts: ns02
+  become: yes
+  tasks:
+  - name: copy named.conf
+    copy: 
+      src: slave-named.conf 
+      dest: /etc/named.conf
+      owner: root 
+      group: named 
+      mode: 0640
+
+  - name: copy resolv.conf to the servers
+    template: 
+      src: servers-resolv.conf.j2
+      dest: /etc/resolv.conf
+      owner: root
+      group: root 
+      mode: 0644
+
+  - name: set /etc/named permissions
+    file: 
+      path: /etc/named 
+      owner: root 
+      group: named 
+      mode: 0670
+
+  - name: ensure named is running and enabled
+    service: 
+      name: named 
+      state: restarted 
+      enabled: yes
