@@ -1,0 +1,34 @@
+[vagrant@testClient1 ~]$ ip -br a
+lo               UNKNOWN        127.0.0.1/8
+eth0             UP             10.0.2.15/24
+eth1             UP             fe80::eeee:255f:2323:4d9b/64
+eth2             UP             192.168.56.21/24 fe80::a00:27ff:fec1:2987/64
+eth1.1@eth1      UP             10.10.10.254/24
+[vagrant@testClient1 ~]$ ping 10.10.10.1
+PING 10.10.10.1 (10.10.10.1) 56(84) bytes of data.
+64 bytes from 10.10.10.1: icmp_seq=1 ttl=64 time=0.675 ms
+64 bytes from 10.10.10.1: icmp_seq=2 ttl=64 time=0.704 ms
+64 bytes from 10.10.10.1: icmp_seq=3 ttl=64 time=0.647 ms
+64 bytes from 10.10.10.1: icmp_seq=4 ttl=64 time=0.967 ms
+^C                                                                                                                                                                                                               --- 10.10.10.1 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3118ms
+rtt min/avg/max/mdev = 0.647/0.748/0.967/0.129 ms
+
+
+
+vagrant@testClient2:~$ ip -br a
+lo               UNKNOWN        127.0.0.1/8
+eth0             UP             10.0.2.15/24 metric 100 fe80::a00:27ff:fe8c:6941/64
+eth1             UP             fe80::a00:27ff:fee6:28d1/64
+eth2             UP             192.168.56.31/24 fe80::a00:27ff:fe0a:6344/64
+vlan2@eth1       UP             10.10.10.254/24 fe80::a00:27ff:fee6:28d1/64
+vagrant@testClient2:~$ ping 10.10.10.1
+PING 10.10.10.1 (10.10.10.1) 56(84) bytes of data.
+64 bytes from 10.10.10.1: icmp_seq=1 ttl=64 time=1.43 ms
+64 bytes from 10.10.10.1: icmp_seq=2 ttl=64 time=0.660 ms
+64 bytes from 10.10.10.1: icmp_seq=3 ttl=64 time=0.752 ms
+64 bytes from 10.10.10.1: icmp_seq=4 ttl=64 time=0.784 ms
+^C
+--- 10.10.10.1 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3041ms
+rtt min/avg/max/mdev = 0.660/0.906/1.430/0.305 ms
