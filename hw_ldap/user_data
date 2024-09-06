@@ -1,0 +1,32 @@
+----------------------
+Added user "otus-user"
+----------------------
+  User login: otus-user
+  First name: Otus
+  Last name: User
+  Full name: Otus User
+  Display name: Otus User
+  Initials: OU
+  Home directory: /home/otus-user
+  GECOS: Otus User
+  Login shell: /bin/sh
+  Principal name: otus-user@OTUS.LAN
+  Principal alias: otus-user@OTUS.LAN
+  User password expiration: 20240906133327Z
+  Email address: otus-user@otus.lan
+  UID: 962800003
+  GID: 962800003
+  Password: True
+  Member of groups: ipausers
+  Kerberos keys available: True
+
+
+
+
+
+[root@client1 ~]# klist
+Ticket cache: KCM:0
+Default principal: otus-user@OTUS.LAN
+
+Valid starting     Expires            Service principal
+09/06/24 16:34:54  09/07/24 15:36:52  krbtgt/OTUS.LAN@OTUS.LAN
