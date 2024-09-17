@@ -1,0 +1,45 @@
+/*!50530 SET @@SESSION.PSEUDO_SLAVE_MODE=1*/;                                                                                                
+/*!50003 SET @OLD_COMPLETION_TYPE=@@COMPLETION_TYPE,COMPLETION_TYPE=0*/;                                                                     
+DELIMITER /*!*/;                                                                                                                             
+# at 4                                                                                                                                       
+#240917 17:22:46 server id 2  end_log_pos 123 CRC32 0xf5af9f20  Start: binlog v 4, server v 5.7.44-48-log created 240917 17:22:46 at startup 
+# Warning: this binlog is either in use or was not closed properly.                                                                          
+ROLLBACK/*!*/;                                                                                                                               
+BINLOG '                                                                                                                                     
+5rrpZg8CAAAAdwAAAHsAAAABAAQANS43LjQ0LTQ4LWxvZwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA                                                                 
+AAAAAAAAAAAAAAAAAADmuulmEzgNAAgAEgAEBAQEEgAAXwAEGggAAAAICAgCAAAACgoKKioAEjQA                                                                 
+ASCfr/U=                                                                                                                                     
+'/*!*/;                                                                                                                                      
+# at 123                                                                                                                                     
+#240917 17:22:46 server id 2  end_log_pos 154 CRC32 0x059f524c  Previous-GTIDs                                                               
+# [empty]                                                                                                                                    
+# at 154                                                                                                                                     
+#240917 17:28:13 server id 1  end_log_pos 219 CRC32 0xb5f6044f  GTID    last_committed=0        sequence_number=1       rbr_only=no          
+SET @@SESSION.GTID_NEXT= '5c865cc7-7508-11ef-ab16-5254004d77d3:40'/*!*/;                                                                     
+# at 219                                                                                                                                     
+#240917 17:28:13 server id 1  end_log_pos 292 CRC32 0x316fbfd9  Query   thread_id=9     exec_time=4294967295    error_code=0                 
+SET TIMESTAMP=1726594093/*!*/;                                                                                                               
+SET @@session.pseudo_thread_id=9/*!*/;                                                                                                       
+SET @@session.foreign_key_checks=1, @@session.sql_auto_is_null=0, @@session.unique_checks=1, @@session.autocommit=1/*!*/;                    
+SET @@session.sql_mode=1436549152/*!*/;                                                                                                      
+SET @@session.auto_increment_increment=1, @@session.auto_increment_offset=1/*!*/;                                                            
+/*!\C utf8 *//*!*/;                                                                                                                          
+SET @@session.character_set_client=33,@@session.collation_connection=33,@@session.collation_server=8/*!*/;                                   
+SET @@session.lc_time_names=0/*!*/;                                                                                                          
+SET @@session.collation_database=DEFAULT/*!*/;                                                                                               
+BEGIN                                                                                                                                        
+/*!*/;                                                                                                                                       
+# at 292                                                                                                                                     
+#240917 17:28:13 server id 1  end_log_pos 419 CRC32 0xf05b34d7  Query   thread_id=9     exec_time=4294967295    error_code=0                 
+use `bet`/*!*/;                                                                                                                              
+SET TIMESTAMP=1726594093/*!*/;                                                                                                               
+INSERT INTO bookmaker (id,bookmaker_name) VALUES(1,'1xbet')                                                                                  
+/*!*/;                                                                                                                                       
+# at 419                                                                                                                                     
+#240917 17:28:13 server id 1  end_log_pos 450 CRC32 0x0046a004  Xid = 736                                                                    
+COMMIT/*!*/;                                                                                                                                 
+SET @@SESSION.GTID_NEXT= 'AUTOMATIC' /* added by mysqlbinlog */ /*!*/;                                                                       
+DELIMITER ;                                                                                                                                  
+# End of log file                                                                                                                            
+/*!50003 SET COMPLETION_TYPE=@OLD_COMPLETION_TYPE*/;                                                                                         
+/*!50530 SET @@SESSION.PSEUDO_SLAVE_MODE=0*/;                                                                                                
